@@ -81,7 +81,7 @@ msg_list = ['1', '0', '0', '1', '0', '0', '0', '1', '1', '0', '0', '1', '0', '1'
 print(len(msg_list))
 
 print('Ord of space is {}'.format(ord(' ')))
-bufffer = []
+buffer = []
 print('d is {}'.format(ord('d')))
 for i in range(0, len(msg_list), 7):
     print(msg_list[i:7+i])

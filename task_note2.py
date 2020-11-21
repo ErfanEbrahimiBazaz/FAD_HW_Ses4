@@ -21,6 +21,19 @@ def bin2message(msg_bin):
     pass
 
 
+def int_content_of_byte(input_byte):
+    """
+    Calculates the int value of an input 7-bit stream of 0 and 1
+    :param input_byte: input 7-bit stream
+    :return: int value
+    """
+    pos = np.array([64, 32, 16, 8, 4, 2, 1])
+    ls1 = list(map(int, input_byte))
+    ls1 = np.array(ls1)
+    res = ls1.dot(pos)
+    return res
+
+
 def image_binary_content_zero_lowest_bit(img_path):
     """
     gets an image path. Converts the image into grayscale.
@@ -101,7 +114,7 @@ new_img_arr = image_binary_content_zero_lowest_bit(img_path) # binary content in
 # new_img_arr = convert_image_bin2int(new_img_arr)
 img = cv.imread(img_path, 1)
 
-msg= 'Hii darling'
+msg= 'HelloWorld'
 msg2bin = message2bin(msg)
 print(len(msg2bin))
 print(msg2bin)
@@ -116,7 +129,7 @@ print(msg2bin)
 print(new_img_arr.flatten()) # shape (102400,)
 flat_img = new_img_arr.flatten()
 
-# embeddin data in the image
+# embedding data in the image
 for i in range(len(msg2bin)):
     print('flat image original value = {}'.format(flat_img[i]))
     print('mesasage binary is {}'.format(msg2bin[i]))
@@ -133,6 +146,7 @@ for i in range(len(msg2bin)):
 
 print(new_img_arr.shape)
 print(flat_img.shape)
+# reshape flat image to original image size
 new_img_arr2 = flat_img.reshape(new_img_arr.shape)
 print(new_img_arr2.shape)
 
@@ -167,10 +181,29 @@ for i in range(num_bits_to_scan):
 print('constructed message is {}'.format(constructed_message))
 print('message string is {}'.format(msg_str))
 print(message2bin(msg))
-print( bytearray(' ', 'utf-8'))
-print(''.join(format(x, 'b') for x in bytearray('H', 'utf-8')))
+# print( bytearray(' ', 'utf-8'))
+# print(''.join(format(x, 'b') for x in bytearray('H', 'utf-8')))
 # print(msg_str.encode('utf8'))
 # print('message content: {}'.format( int() ))
+
+# final stage to reconstruct the message from list of bits
+message_buffer = ''
+for i in range(0, len(constructed_message), 7):
+    print(constructed_message[i:7+i])
+    if (i+7 <= len(constructed_message)):
+        # print(int_content_of_byte(constructed_message[i:7+i]))
+        # print(chr(int_content_of_byte(constructed_message[i:7+i])))
+        message_buffer += chr(int_content_of_byte(constructed_message[i:7+i]))
+    else:
+        ls_tmp = list(constructed_message[i:])
+        zeros_to_pad = 7 - len(constructed_message[i:])
+        print('Zeros to pad is {}'.format(zeros_to_pad))
+        for i in range(zeros_to_pad):
+            ls_tmp.append('0')
+        # print('--------------- ls_tmp is {}'.format(ls_tmp))
+        print(int_content_of_byte( ls_tmp ))  # msg_list[i:7 + i].append('0')
+
+print(message_buffer)
 
 #
 # #     for x in range(new_img_arr.shape[0]):
