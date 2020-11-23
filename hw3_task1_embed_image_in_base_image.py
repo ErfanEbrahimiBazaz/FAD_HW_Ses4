@@ -286,23 +286,23 @@ cv.imshow('Constructed image from base', const_byte_2D_array.astype('uint16'))
 # for i in range(0, 48400, 4):
 #     print(bin(h[i]))
 
-print('Number of read bytes in the original image {}'.format(len(embedded_img_list)))
-
-num_loop = len(embedded_img_list)//4
-print('Number of loops to reconstruct the bytes {}'.format(num_loop)) ## 48400
+# print('Number of read bytes in the original image {}'.format(len(embedded_img_list)))
+#
+# num_loop = len(embedded_img_list)//4
+# print('Number of loops to reconstruct the bytes {}'.format(num_loop)) ## 48400
 
 # c_h_img = []
 # for i in range(0, len(two_bit_message_list), 4):
 #     const_byte = two_bit_message_list[i] + two_bit_message_list[i+1] + two_bit_message_list[i+2] + two_bit_message_list[i+3]
 #     c_h_img.append(const_byte)
 
-hidden_img_construct_flat = []
-for i in range(0, num_loop, 4):
-    # new_row = ''
-    # counter = 0
-    new_row = embedded_img_list[i] + embedded_img_list[i+1] + embedded_img_list[i+2] + embedded_img_list[i+3]
-    # print(new_row)
-    hidden_img_construct_flat.append(new_row)
+# hidden_img_construct_flat = []
+# for i in range(0, num_loop, 4):
+#     # new_row = ''
+#     # counter = 0
+#     new_row = embedded_img_list[i] + embedded_img_list[i+1] + embedded_img_list[i+2] + embedded_img_list[i+3]
+#     # print(new_row)
+#     hidden_img_construct_flat.append(new_row)
     # for row in embedded_img_list:
     #     new_row = new_row + row
     #     counter += 1
@@ -314,8 +314,8 @@ for i in range(0, num_loop, 4):
 #         new_row = new_row + row
 #     print(new_row)
 
-print(img_to_hide.shape)
-print('hidden image construct flat length {}'.format(len(hidden_img_construct_flat)))
+# print(img_to_hide.shape)
+# print('hidden image construct flat length {}'.format(len(hidden_img_construct_flat)))
 # hidden_img_construct_flat = np.array(hidden_img_construct_flat, np.float32)
 # constructed_hidden_image = hidden_img_construct_flat.reshape(img_to_hide.shape)
 
