@@ -193,9 +193,11 @@ for i in range(0, len(embedded_img_list), 4):
 # [print(rec) for rec in const_byte_list]
 print('LENGTH OF CONSTRUCT BYTES IS {}'.format(len(const_byte_list)))
 
-const_byte_list_tmp = np.array(const_byte_list, np.float64)
+# const_byte_list_tmp = np.array(const_byte_list, np.float64)
+const_byte_list_tmp = np.array([int(pixel, 2) for pixel in const_byte_list], dtype=np.uint8)
+
 const_byte_2D_array = const_byte_list_tmp.reshape(img_to_hide.shape)  #((220,220))
-const_byte_2D_array = const_byte_2D_array.astype('uint16')
+# const_byte_2D_array = const_byte_2D_array.astype('uint16')
 cv.imshow('Constructed image from base', const_byte_2D_array)
 cv.imwrite('reconstructed_image.jpeg', const_byte_2D_array)
 
