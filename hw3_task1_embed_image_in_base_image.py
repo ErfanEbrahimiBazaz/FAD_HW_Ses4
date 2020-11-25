@@ -197,6 +197,9 @@ print('LENGTH OF CONSTRUCT BYTES IS {}'.format(len(const_byte_list)))
 const_byte_list_tmp = np.array([int(pixel, 2) for pixel in const_byte_list], dtype=np.uint8)
 
 const_byte_2D_array = const_byte_list_tmp.reshape(img_to_hide.shape)  #((220,220))
+
+cv.imwrite('steg.jpg', const_byte_2D_array)
+cv.imwrite('org.jpg', img)
 # const_byte_2D_array = const_byte_2D_array.astype('uint16')
 cv.imshow('Constructed image from base', const_byte_2D_array)
 cv.imwrite('reconstructed_image.jpeg', const_byte_2D_array)
